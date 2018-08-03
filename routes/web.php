@@ -33,3 +33,6 @@ Route::post('wallet/add','WalletController@add')->name('wallet.add');
 
 Route::get('wallet/edit/{id}','WalletController@showFormEdit')->name('wallet.showEdit');
 Route::put('wallet/update/{wallet}','WalletController@edit')->name('wallet.edit');
+
+Route::get('wallet/transfer','WalletController@showFormTransfer')->name('wallet.showTransfer');
+Route::post('wallet/transfer','WalletController@transfer')->name('wallet.transfer');

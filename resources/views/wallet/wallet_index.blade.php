@@ -3,8 +3,13 @@
 @section('title') Wallet @endsection
 
 @section('content')
+
 <div class="mb-2">
 <a href="{{ route('wallet.showAdd') }}" title="Add New Wallet" class="btn btn-primary">+ Create New Wallet</a>
+</div>
+
+<div class="mb-2">
+	<a class="btn btn-warning" href="{{ route('wallet.showTransfer') }}" title="Transfer Money">Transfer Money Between Wallets</a>
 </div>
 
 <div class="container">
@@ -25,6 +30,7 @@
 	                		<td>Wallet Name</td>
 	                		<td>Balance</td>
 	                		<td></td>
+	                		<td></td>
 	                	</tr>
 	              	</thead>
 	              	<tfoot>
@@ -37,7 +43,8 @@
 							<td>{{ $count += 1 }}</td>
 							<td>{{ $key['name'] }}</td>
 							<td>{{ number_format($key['balance']) }} VND</td>
-							<td><a href="/wallet/edit/{{ $key['id'] }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-primary" href="/wallet/edit/{{ $key['id'] }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="#" title="Delete" onclick="return confirm('Do you want to delete {{ $key['name'] }} Wallet?');">Delete</a></td>
 						</tr>
 	            		@endforeach
 	              	</tbody>
