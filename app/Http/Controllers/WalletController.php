@@ -67,6 +67,7 @@ class WalletController extends Controller
             'send' => 'required',
             'receive' => 'required|different:send',
             'money' => 'required|numeric|min:1',
+            'note' => 'required'
         ]);
 
         $walletTran = new WalletTransaction;

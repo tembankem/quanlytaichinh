@@ -1,21 +1,21 @@
 @extends('layouts.layouts')
 
-@section('title') Create New Wallet @endsection
+@section('title') Create New Receive Category @endsection
 
 @section('content')
 <div class="container">
-    <a href= "{{ route('wallet.index') }}" title="Back" class="btn btn-primary mb-3">Back</a>
+    <a href= "{{ route('category.receiveIndex') }}" title="Back" class="btn btn-primary mb-3">Back</a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Add New Wallet') }}</div>
+                <div class="card-header">{{ __('Add New Receive Category') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('wallet.add') }}" aria-label="{{ __('Add New Wallet') }}">
+                    <form method="POST" action="{{ route('category.addReceive') }}" aria-label="{{ __('Add New Receive Category') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Wallet Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Category Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -29,14 +29,19 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="money" class="col-md-4 col-form-label text-md-right">{{ __('Money') }}</label>
+                            <label for="parent" class="col-md-4 col-form-label text-md-right">{{ __('Parent Category (optional)') }}</label>
 
                             <div class="col-md-6">
-                                <input id="money" type="number" class="form-control{{ $errors->has('money') ? ' is-invalid' : '' }}" name="money" value="{{ old('money') }}" required>
+                                <select id="parent" class="form-control{{ $errors->has('parent') ? ' is-invalid' : '' }}" name="parent" value="{{ old('parent') }}">
+                                    <option value="0">No Parent</option>
+                                    @foreach($data as $key)
+                                        <option value="{{ $key['id'] }}">{{ $key['name'] }}</option>
+                                    @endforeach
+                                </select>
 
-                                @if ($errors->has('money'))
+                                @if ($errors->has('parent'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('money') }}</strong>
+                                        <strong>{{ $errors->first('parent') }}</strong>
                                     </span>
                                 @endif
                             </div>

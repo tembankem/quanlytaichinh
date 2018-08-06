@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container">
+    <a href= "{{ route('wallet.index') }}" title="Back" class="btn btn-primary mb-3">Back</a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

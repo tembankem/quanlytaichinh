@@ -36,3 +36,16 @@ Route::put('wallet/update/{wallet}','WalletController@edit')->name('wallet.edit'
 
 Route::get('wallet/transfer','WalletController@showFormTransfer')->name('wallet.showTransfer');
 Route::post('wallet/transfer','WalletController@transfer')->name('wallet.transfer');
+
+Route::get('category/spend','CategoryController@showSpendIndex')->name('category.spendIndex');
+Route::get('category/receive','CategoryController@showReceiveIndex')->name('category.receiveIndex');
+
+Route::get('category/spend/add','CategoryController@showAddSpendForm')->name('category.showAddSpend');
+Route::post('category/spend/add','CategoryController@addSpend')->name('category.addSpend');
+
+Route::get('category/receive/add','CategoryController@showAddReceiveForm')->name('category.showAddReceive');
+Route::post('category/receive/add','CategoryController@addReceive')->name('category.addReceive');
+
+Route::get('category/spend/{id}','CategoryController@showEditSpendForm')->name('category.showEditSpend');
+Route::get('category/receive/{id}','CategoryController@showEditReceiveForm')->name('category.showEditReceive');
+Route::put('category/update/{category}','CategoryController@edit')->name('category.edit');

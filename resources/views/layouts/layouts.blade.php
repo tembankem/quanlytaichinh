@@ -36,9 +36,9 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">#</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
@@ -49,15 +49,15 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Transaction Categories</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Navbar</a>
+              <a href="{{ route('category.spendIndex') }}">Spend</a>
             </li>
             <li>
-              <a href="cards.html">Cards</a>
+              <a href="{{ route('category.receiveIndex') }}">Receive</a>
             </li>
           </ul>
         </li>
