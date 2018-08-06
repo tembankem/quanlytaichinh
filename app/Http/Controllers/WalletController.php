@@ -58,7 +58,7 @@ class WalletController extends Controller
     }
 
     public function showFormTransfer(){
-        $data = Wallet::all();
+        $data = Wallet::where('user_id',Auth::id())->get();
         return view('wallet.wallet_transfer')->with('data',$data);
     }
 

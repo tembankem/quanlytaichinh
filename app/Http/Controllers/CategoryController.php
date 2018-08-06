@@ -14,12 +14,12 @@ class CategoryController extends Controller
     }
 
     public function showSpendIndex(){
-    	$data = Category::where('type',1)->get();
+    	$data = Category::where('type',1)->where('user_id',Auth::id())->get();
     	return view('category.spend_index')->with('data',$data);
     }
 
     public function showAddSpendForm(){
-    	$data = Category::where('type',1)->where('level',1)->orWhere('type',1)->where('level',2)->get();
+    	$data = Category::where('type',1)->where('level',1)->where('user_id',Auth::id())->orWhere('type',1)->where('level',2)->where('user_id',Auth::id())->get();
     	return view('category.add_spend')->with('data',$data);
     }
 
@@ -50,12 +50,12 @@ class CategoryController extends Controller
     }
 
     public function showReceiveIndex(){
-    	$data = Category::where('type',2)->get();
+    	$data = Category::where('type',2)->where('user_id',Auth::id())->get();
     	return view('category.receive_index')->with('data',$data);
     }
 
     public function showAddReceiveForm(){
-    	$data = Category::where('type',2)->where('level',1)->orWhere('type',2)->where('level',2)->get(	);
+    	$data = Category::where('type',2)->where('level',1)->where('user_id',Auth::id())->orWhere('type',2)->where('level',2)->where('user_id',Auth::id())->get();
     	return view('category.add_receive')->with('data',$data);
     }
 
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     }
 
     public function showEditSpendForm($id){
-    	$data = Category::where('type',1)->where('level',1)->where('id','!=',$id)->orWhere('type',1)->where('level',2)->where('id','!=',$id)->get();
+    	$data = Category::where('type',1)->where('level',1)->where('id','!=',$id)->where('user_id',Auth::id())->orWhere('type',1)->where('level',2)->where('id','!=',$id)->where('user_id',Auth::id())->get();
     	$category = Category::find($id);
     	return view('category.edit')->with([
     		'data' => $data,
@@ -95,7 +95,7 @@ class CategoryController extends Controller
     }
 
     public function showEditReceiveForm($id){
-    	$data = Category::where('type',2)->where('level',1)->where('id','!=',$id)->orWhere('type',2)->where('level',2)->where('id','!=',$id)->get();
+    	$data = Category::where('type',2)->where('level',1)->where('id','!=',$id)->where('user_id',Auth::id())->orWhere('type',2)->where('level',2)->where('id','!=',$id)->where('user_id',Auth::id())->get();
     	$category = Category::find($id);
     	return view('category.edit')->with([
     		'data' => $data,
