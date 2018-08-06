@@ -16,7 +16,7 @@ class CreateWallettransactionsTable extends Migration
         Schema::create('wallettransactions', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('exchange')->unsigned();
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->unsignedInteger('receive_wallet_id');
             $table->unsignedInteger('wallet_id');
             $table->timestamps();
