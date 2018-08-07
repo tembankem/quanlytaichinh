@@ -15,6 +15,9 @@
                     </div>
                 @endif
                 <div class="card-body">
+                    @if($data->isEmpty())
+                        <p class="text-center">You don't have any category. <a href="{{ route('category.showAddReceive') }}" title="Create New Category">Create one!</a></p>
+                    @endif
                     <ul class="">
                     	@foreach($data as $key)
                     	@if($key['level'] == 1)

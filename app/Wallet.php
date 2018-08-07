@@ -19,4 +19,8 @@ class Wallet extends Model
     public function walletTransactionReceive(){
     	return $this->hasMany('App\WalletTransaction','receive_wallet_id');
     }
+
+    public function transaction(){
+        return $this->hasMany('App\Transaction');
+    }
 }

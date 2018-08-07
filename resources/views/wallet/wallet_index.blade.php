@@ -22,8 +22,11 @@
         
         <div class="card-header"><i class="fa fa-table"></i> Wallets</div>
     	<div class="card-body">
+    		@if($data->isEmpty())
+                <p class="text-center">You don't have any wallet. <a href="{{ route('wallet.showAdd') }}" title="Create New Wallet">Create one!</a></p>
+            @endif
          	<div class="table-responsive">
-	            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	            <table class="table table-bordered" id="walletTable" width="100%" cellspacing="0">
 	              	<thead>
 	                	<tr>
 	                		<td>No.</td>

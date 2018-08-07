@@ -15,4 +15,8 @@ class WalletTransaction extends Model
     public function receiveWallet(){
     	return $this->belongsTo('App\Wallet','receive_wallet_id');
     }
+
+    public function user(){
+    	return $this->belongsTo('App\User');
+    }
 }

@@ -9,29 +9,33 @@ use App\Category;
 
 class CategoryController extends Controller
 {
+    private $spend = 1;
+    private $receive = 2;
+    private $rootLevel = 1;
+
 	public function __construct(){
     	return $this->middleware('auth');
     }
 
     public function showSpendIndex(){
-    	$data = Category::where('type',1)->where('user_id',Auth::id())->get();
+    	$data = Category::where('type',$this->spend)->where('user_id',Auth::id())->get();
     	return view('category.spend_index')->with('data',$data);
     }
 
     public function showAddSpendForm(){
-    	$data = Category::where('type',1)->where('level',1)->where('user_id',Auth::id())->orWhere('type',1)->where('level',2)->where('user_id',Auth::id())->get();
+    	$data = Category::where('type',$this->spend)->where('level',$this->rootLevel)->where('user_id',Auth::id())->orWhere('type',$this->spend)->where('level',$this->rootLevel+1)->where('user_id',Auth::id())->get();
     	return view('category.add_spend')->with('data',$data);
     }
 
     public function addSpend(Request $request){
     	$validatedData = $request->validate([
-    			'name' => 'required|string|unique:categories',
+    		'name' => 'required|string|unique:categories',
     	]);
     	if ($request->get('parent') == 0) {
     		$category = new Category;
     		$category->name = $request->get('name');
-    		$category->type = 1;
-    		$category->level = 1;
+    		$category->type = $this->spend;
+    		$category->level = $this->rootLevel;
     		$category->user_id = Auth::id();
     		$category->save();
     		return redirect()->route('category.spendIndex')->with('success','Create new category successfully!');
@@ -40,7 +44,7 @@ class CategoryController extends Controller
     		$parent = Category::find($request->get('parent'));
     		$category = new Category;
     		$category->name = $request->get('name');
-    		$category->type = 1;
+    		$category->type = $this->spend;
     		$category->level = $parent->level + 1;
     		$category->parent_id = $parent->id;
     		$category->user_id = Auth::id();
@@ -50,24 +54,24 @@ class CategoryController extends Controller
     }
 
     public function showReceiveIndex(){
-    	$data = Category::where('type',2)->where('user_id',Auth::id())->get();
+    	$data = Category::where('type',$this->receive)->where('user_id',Auth::id())->get();
     	return view('category.receive_index')->with('data',$data);
     }
 
     public function showAddReceiveForm(){
-    	$data = Category::where('type',2)->where('level',1)->where('user_id',Auth::id())->orWhere('type',2)->where('level',2)->where('user_id',Auth::id())->get();
+    	$data = Category::where('type',$this->receive)->where('level',$this->rootLevel)->where('user_id',Auth::id())->orWhere('type',$this->receive)->where('level',$this->rootLevel+1)->where('user_id',Auth::id())->get();
     	return view('category.add_receive')->with('data',$data);
     }
 
     public function addReceive(Request $request){
     	$validatedData = $request->validate([
-    			'name' => 'required|string|unique:categories',
+    		'name' => 'required|string|unique:categories',
     	]);
     	if ($request->get('parent') == 0) {
     		$category = new Category;
     		$category->name = $request->get('name');
-    		$category->type = 2;
-    		$category->level = 1;
+    		$category->type = $this->receive;
+    		$category->level = $this->rootLevel;
     		$category->user_id = Auth::id();
     		$category->save();
     		return redirect()->route('category.receiveIndex')->with('success','Create new category successfully!');
@@ -76,7 +80,7 @@ class CategoryController extends Controller
     		$parent = Category::find($request->get('parent'));
     		$category = new Category;
     		$category->name = $request->get('name');
-    		$category->type = 2;
+    		$category->type = $this->receive;
     		$category->level = $parent->level + 1;
     		$category->parent_id = $parent->id;
     		$category->user_id = Auth::id();
@@ -86,7 +90,7 @@ class CategoryController extends Controller
     }
 
     public function showEditSpendForm($id){
-    	$data = Category::where('type',1)->where('level',1)->where('id','!=',$id)->where('user_id',Auth::id())->orWhere('type',1)->where('level',2)->where('id','!=',$id)->where('user_id',Auth::id())->get();
+    	$data = Category::where('type',$this->spend)->where('level',$this->rootLevel)->where('id','!=',$id)->where('user_id',Auth::id())->orWhere('type',$this->spend)->where('level',$this->rootLevel+1)->where('id','!=',$id)->where('user_id',Auth::id())->get();
     	$category = Category::find($id);
     	return view('category.edit')->with([
     		'data' => $data,
@@ -95,7 +99,7 @@ class CategoryController extends Controller
     }
 
     public function showEditReceiveForm($id){
-    	$data = Category::where('type',2)->where('level',1)->where('id','!=',$id)->where('user_id',Auth::id())->orWhere('type',2)->where('level',2)->where('id','!=',$id)->where('user_id',Auth::id())->get();
+    	$data = Category::where('type',$this->receive)->where('level',$this->rootLevel)->where('id','!=',$id)->where('user_id',Auth::id())->orWhere('type',$this->receive)->where('level',$this->rootLevel+1)->where('id','!=',$id)->where('user_id',Auth::id())->get();
     	$category = Category::find($id);
     	return view('category.edit')->with([
     		'data' => $data,
@@ -104,7 +108,6 @@ class CategoryController extends Controller
     }
 
     public function edit(Request $request, Category $category){
-    	$parent = Category::find($request->get('parent'));
     	if ($request->get('name') == $category->name && $request->get('parent') == $category->parent_id) {
     		return redirect()->back()->with('success', 'Nothing to update!');
     	}
@@ -114,10 +117,11 @@ class CategoryController extends Controller
         if ($request->get('parent') == 0) {
         	$category->name = $request->get('name');
         	$category->parent_id = null;
-        	$category->level = 1;
+        	$category->level = $this->rootLevel;
 	        $category->save();
 	        return redirect()->back()->with('success','Updated Successfully!');
         }
+        $parent = Category::find($request->get('parent'));
         $category->name = $request->get('name');
         $category->parent_id = $parent->id;
         $category->level = $parent->level + 1;

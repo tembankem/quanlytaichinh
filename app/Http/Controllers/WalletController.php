@@ -7,6 +7,7 @@ use App\Wallet;
 use Illuminate\Support\Facades\Auth; 
 use App\User;
 use App\WalletTransaction;
+use Carbon\Carbon;
 
 class WalletController extends Controller
 {
@@ -15,8 +16,7 @@ class WalletController extends Controller
     }
 
     public function index(){
-    	$data = [];
-    	$data = Wallet::where('user_id',Auth::id())->get();
+    	$data = Auth::user()->wallet;
     	return view('wallet.wallet_index')->with('data',$data);
     }
 
@@ -67,7 +67,6 @@ class WalletController extends Controller
             'send' => 'required',
             'receive' => 'required|different:send',
             'money' => 'required|numeric|min:1',
-            'note' => 'required'
         ]);
 
         $walletTran = new WalletTransaction;
@@ -75,6 +74,8 @@ class WalletController extends Controller
         $walletTran->note = $request->get('note');
         $walletTran->receive_wallet_id = $request->get('receive');
         $walletTran->wallet_id = $request->get('send');
+        $walletTran->date = Carbon::now()->format('Y-m-d');
+        $walletTran->user_id = Auth::id();
         $walletTran->save();
 
         $walletSend = Wallet::find($request->get('send'));
@@ -86,5 +87,50 @@ class WalletController extends Controller
         $walletReceive->save();
 
         return redirect()->route('wallet.showTransfer')->with('success','Money Transfer Successfully!');
+    }
+
+    public function showEditTransferForm($id){
+        $walletTrans = WalletTransaction::find($id);
+        return view('wallet.wallet_transfer_edit')->with('walletTrans',$walletTrans);
+    }
+
+    public function editTransfer(Request $request, $id){
+        $walletTrans = WalletTransaction::find($id);
+        $validatedData = $request->validate([
+            'money' => 'required|numeric|min:1',
+        ]);
+
+        if ($request->get('money') == $walletTrans->exchange && $request->get('note') == $walletTrans->note) {
+            return redirect()->back()->with('success','Nothing To Update!');
+        }
+
+        if ($request->get('money') != $walletTrans->exchange) {
+            $walletSend = $walletTrans->wallet;
+            $walletSend->balance = $walletSend->balance + $walletTrans->exchange - $request->get('money');
+            $walletSend->save();
+
+            $walletReceive = $walletTrans->receiveWallet;
+            $walletReceive->balance = $walletReceive->balance - $walletTrans->exchange + $request->get('money');
+            $walletReceive->save();
+
+            $walletTrans->exchange = $request->get('money');
+        }
+        $walletTrans->note = $request->get('note');
+        $walletTrans->save();
+        return redirect()->back()->with('success','Transfer Updated Successfully!');
+    }
+
+    public function deleteTransfer($id){
+        $trans = WalletTransaction::find($id);
+        $walletSend = $trans->wallet;
+        $walletSend->balance += $trans->exchange;
+        $walletSend->save();
+
+        $walletReceive = $trans->receiveWallet;
+        $walletReceive->balance -= $trans->exchange;
+        $walletReceive->save();
+
+        $trans->delete();
+        return redirect()->back()->with('success','Delete Transfer Successfully');
     }
 }

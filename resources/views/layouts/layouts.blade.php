@@ -35,21 +35,15 @@
             <span class="nav-link-text">Wallets</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">#</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="{{ route('transaction.index') }}">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Transactions</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">Transaction Categories</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
@@ -58,26 +52,6 @@
             </li>
             <li>
               <a href="{{ route('category.receiveIndex') }}">Receive</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Example Pages</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-            <li>
-              <a href="login.html">Login Page</a>
-            </li>
-            <li>
-              <a href="register.html">Registration Page</a>
-            </li>
-            <li>
-              <a href="forgot-password.html">Forgot Password Page</a>
-            </li>
-            <li>
-              <a href="blank.html">Blank Page</a>
             </li>
           </ul>
         </li>
@@ -295,13 +269,49 @@
     <script src="{{ asset('/js/sb-admin-datatables.min.js') }}"></script>
     <script src="{{ asset('/js/sb-admin-charts.min.js') }}"></script>
     <script>
-      $('#dataTable').dataTable( {
+      $('#walletTable').dataTable( {
             "language": {
               "emptyTable": "You don't have any Wallet",
               "lengthMenu":     "Show _MENU_ Wallets",
               "info":           "Showing _START_ to _END_ of _TOTAL_ Wallets",
               "infoEmpty":      "Showing 0 to 0 of 0 Wallets"
             }
+      } );
+
+      $('#walletTransactionTable').dataTable( {
+            "language": {
+              "emptyTable": "You don't have any Transfer",
+              "lengthMenu":     "Show _MENU_ Transfers",
+              "info":           "Showing _START_ to _END_ of _TOTAL_ Transfer",
+              "infoEmpty":      "Showing 0 to 0 of 0 Transfer"
+            },
+            "columnDefs": [
+              { "orderable": false, "targets": [6,7] }
+            ]
+      } );
+
+      $('#spendTransactionTable').dataTable( {
+            "language": {
+              "emptyTable": "You don't have any Transaction",
+              "lengthMenu":     "Show _MENU_ Transactions",
+              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+            },
+            "columnDefs": [
+              { "orderable": false, "targets": [6,7] }
+            ]
+      } );
+
+      $('#receiveTransactionTable').dataTable( {
+            "language": {
+              "emptyTable": "You don't have any Transaction",
+              "lengthMenu":     "Show _MENU_ Transactions",
+              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+            },
+            "columnDefs": [
+              { "orderable": false, "targets": [6,7] }
+            ]
       } );
     </script>
   </div>
