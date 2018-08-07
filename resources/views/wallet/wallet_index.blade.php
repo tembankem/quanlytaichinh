@@ -19,6 +19,12 @@
 			{{ session('success') }}
 		</div>
 		@endif
+
+		@if(session('error'))
+		<div class="alert alert-danger">
+			{{ session('error') }}
+		</div>
+		@endif
         
         <div class="card-header"><i class="fa fa-table"></i> Wallets</div>
     	<div class="card-body">
@@ -45,9 +51,9 @@
 						<tr>
 							<td>{{ $count += 1 }}</td>
 							<td>{{ $key['name'] }}</td>
-							<td>{{ number_format($key['balance']) }} VND</td>
+							<td>{{ number_format($key['balance']) }} đ</td>
 							<td class="text-center"><a class="btn btn-primary" href="/wallet/edit/{{ $key['id'] }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="#" title="Delete" onclick="return confirm('Do you want to delete {{ $key['name'] }} Wallet?');">Delete</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('wallet.deleteWallet',$key['id']) }}" title="Delete" onclick="return confirm('Do you want to delete this Wallet?');">Delete</a></td>
 						</tr>
 	            		@endforeach
 	              	</tbody>

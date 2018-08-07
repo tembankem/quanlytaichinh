@@ -16,6 +16,11 @@
                         {{ session('success') }}
                     </div>
                     @endif
+                    @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    @endif
                     <form method="POST" action="{{ route('category.edit',$category['id']) }}" aria-label="{{ __('Edit Category') }}">
                         <input type="hidden" name="_method" value="PUT">
                         @csrf
@@ -58,6 +63,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update') }}
                                 </button>
+                                <a href="{{ route('category.delete', $category['id']) }}" title="Delete" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </form>

@@ -38,6 +38,9 @@ Route::post('wallet/add','WalletController@add')->name('wallet.add');
 //edit wallet
 Route::get('wallet/edit/{id}','WalletController@showFormEdit')->name('wallet.showEdit');
 Route::put('wallet/update/{wallet}','WalletController@edit')->name('wallet.edit');
+//delete wallet
+Route::get('wallet/delete/{id}','WalletController@deleteWallet')->name('wallet.deleteWallet');
+
 //transfer money between wallet
 Route::get('wallet/transfer','WalletController@showFormTransfer')->name('wallet.showTransfer');
 Route::post('wallet/transfer','WalletController@transfer')->name('wallet.transfer');
@@ -60,6 +63,8 @@ Route::post('category/receive/add','CategoryController@addReceive')->name('categ
 Route::get('category/spend/{id}','CategoryController@showEditSpendForm')->name('category.showEditSpend');
 Route::get('category/receive/{id}','CategoryController@showEditReceiveForm')->name('category.showEditReceive');
 Route::put('category/update/{category}','CategoryController@edit')->name('category.edit');
+//delete category
+Route::get('category/delete/{id}','CategoryController@delete')->name('category.delete');
 
 // Transactions
 //show transactions

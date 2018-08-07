@@ -128,4 +128,20 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->back()->with('success','Updated Successfully!');
     }
+
+    public function delete($id){
+        $category = Category::find($id);
+        $type = $category->type;
+        if (!($category->child->isEmpty()) ) {
+            return redirect()->back()->with('error','Cannot delete this category, because it still has child categories. Please delete its child first!');
+        }
+        elseif(!($category->transaction->isEmpty()) ){
+            return redirect()->back()->with('error','Cannot delete this category, because it still has transactions. Please delete its transactions first!');
+        }
+        $category->delete();
+        if ($type==$this->spend) {
+            return redirect()->route('category.spendIndex')->with('success','Delete category successfully!');
+        }
+        return redirect()->route('category.receiveIndex')->with('success','Delete category successfully!');
+    }
 }

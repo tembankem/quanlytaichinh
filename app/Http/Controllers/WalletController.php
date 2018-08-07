@@ -57,6 +57,15 @@ class WalletController extends Controller
         return redirect()->back()->with('success','Wallet Updated Successfully');
     }
 
+    public function deleteWallet($id){
+        $wallet = Wallet::find($id);
+        if (!($wallet->transaction->isEmpty()) || !($wallet->walletTransaction->isEmpty()) || !($wallet->walletTransactionReceive->isEmpty())) {
+            return redirect()->back()->with('error','Cannot delete this wallet because it still has transactions or transfers. Please delete transactions or transfer first!');
+        }
+        $wallet->delete();
+        return redirect()->back()->with('success','Delete Wallet Successfully');
+    }
+
     public function showFormTransfer(){
         $data = Wallet::where('user_id',Auth::id())->get();
         return view('wallet.wallet_transfer')->with('data',$data);
