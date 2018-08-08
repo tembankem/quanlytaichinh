@@ -13,8 +13,6 @@ use App\WalletTransaction;
 
 class TransactionController extends Controller
 {
-	private $spend = 1;
-	private $receive = 2;
     public function __construct(){
     	return $this->middleware('auth');
     }
@@ -29,8 +27,19 @@ class TransactionController extends Controller
     	]);
     }
 
+    public function showIndexByMonth(Request $request){
+        $month = Carbon::parse($request->get('month'));
+        $walletTransactions = Auth::user()->walletTransaction()->whereMonth('date',$month->month)->get();
+        $transactions = Auth::user()->transaction()->whereMonth('date',$month->month)->get();
+        return view('transaction.index_by_month')->with([
+            'walletTransactions' => $walletTransactions,
+            'transactions' => $transactions,
+            'month' => $month,
+        ]);
+    }
+
     public function showAddSpendForm(){
-    	$categories = Auth::user()->category()->where('type',$this->spend)->get();
+    	$categories = Auth::user()->category()->where('type',config('const.spendType'))->get();
     	$wallets = Auth::user()->wallet;
     	return view('transaction.add_spend')->with([
     		'categories' => $categories,
@@ -63,7 +72,7 @@ class TransactionController extends Controller
     }
 
     public function showAddReceiveForm(){
-    	$categories = Auth::user()->category()->where('type',$this->receive)->get();
+    	$categories = Auth::user()->category()->where('type',config('const.receiveType'))->get();
     	$wallets = Auth::user()->wallet;
     	return view('transaction.add_receive')->with([
     		'categories' => $categories,
@@ -96,7 +105,7 @@ class TransactionController extends Controller
     }
 
     public function showEditSpendForm($id){
-    	$categories = Auth::user()->category()->where('type',$this->spend)->get();
+    	$categories = Auth::user()->category()->where('type',config('const.spendType'))->get();
     	$transaction = Transaction::find($id);
     	return view('transaction.edit_spend')->with([
     		'categories' => $categories,
@@ -105,7 +114,7 @@ class TransactionController extends Controller
     }
 
     public function showEditReceiveForm($id){
-    	$categories = Auth::user()->category()->where('type',$this->receive)->get();
+    	$categories = Auth::user()->category()->where('type',config('const.receiveType'))->get();
     	$transaction = Transaction::find($id);
     	return view('transaction.edit_receive')->with([
     		'categories' => $categories,

@@ -1,6 +1,6 @@
 @extends('layouts.layouts')
 
-@section('title') Transactions This Month @endsection
+@section('title') Transactions in {{ \Carbon\Carbon::parse($month)->format('F-Y') }} @endsection
 
 @section('content')
 
@@ -23,8 +23,8 @@
                 @endif
             </div>
             <button type="submit" class="btn btn-primary">
-                    {{ __('Search') }}
-                </button>
+                {{ __('Search') }}
+            </button>
         </div>
 	</form>
 	@if(session('success'))
@@ -36,7 +36,7 @@
         <p class="text-center">You don't have any transactions.</p>
     @endif
 	<div class="card mb-3">
-        <div class="card-header"><i class="fa fa-table"></i> Spend Transactions This Month</div>
+        <div class="card-header"><i class="fa fa-table"></i> Spend Transactions in {{ \Carbon\Carbon::parse($month)->format('F-Y') }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
 	            <table class="table table-bordered" id="spendTransactionTable" width="100%" cellspacing="0">
@@ -78,7 +78,7 @@
 	</div>
 
 	<div class="card mb-3">
-        <div class="card-header"><i class="fa fa-table"></i> Receive Transactions This Month</div>
+        <div class="card-header"><i class="fa fa-table"></i> Receive Transactions in {{ \Carbon\Carbon::parse($month)->format('F-Y') }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
 	            <table class="table table-bordered" id="receiveTransactionTable" width="100%" cellspacing="0">
@@ -120,7 +120,7 @@
 	</div>
 
 	<div class="card mb-3">
-        <div class="card-header"><i class="fa fa-table"></i> Money Transfer Between Wallets This Month</div>
+        <div class="card-header"><i class="fa fa-table"></i> Money Transfer Between Wallets in {{ \Carbon\Carbon::parse($month)->format('F-Y') }}</div>
     	<div class="card-body">
     		@if($walletTransactions->isEmpty())
                 <p class="text-center">You don't have any transfer.</p>

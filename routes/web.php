@@ -69,6 +69,7 @@ Route::get('category/delete/{id}','CategoryController@delete')->name('category.d
 // Transactions
 //show transactions
 Route::get('transaction/index','TransactionController@index')->name('transaction.index');
+Route::post('transaction/index/month','TransactionController@showIndexByMonth')->name('transaction.indexByMonth');
 //add transaction
 Route::get('transaction/spend/add','TransactionController@showAddSpendForm')->name('transaction.showAddSpend');
 Route::post('transaction/spend/add','TransactionController@addSpend')->name('transaction.addSpend');
