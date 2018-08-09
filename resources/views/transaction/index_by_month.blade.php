@@ -14,7 +14,7 @@
             <label for="month" class="col-md-2 col-form-label text-md-right">{{ __('Search by Month') }}</label>
 
             <div class="col-md-2">
-                <input id="month" type="month" class="form-control{{ $errors->has('date') ? ' is-invalid' : '' }}" name="month" value="">
+                <input id="month" type="month" class="form-control{{ $errors->has('month') ? ' is-invalid' : '' }}" name="month" value="">
 
                 @if ($errors->has('month'))
                     <span class="invalid-feedback" role="alert">
@@ -27,6 +27,7 @@
             </button>
         </div>
 	</form>
+	<a class="btn btn-warning mb-3" href="{{ route('transaction.showCategory') }}" title="Search by Category">Search by Category</a>
 	@if(session('success'))
 	<div class="alert alert-success">
 		{{ session('success') }}

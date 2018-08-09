@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Transaction;
 use App\WalletTransaction;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -28,6 +29,9 @@ class TransactionController extends Controller
     }
 
     public function showIndexByMonth(Request $request){
+        $validatedData = $request->validate([
+            'month' => 'required'
+        ]);
         $month = Carbon::parse($request->get('month'));
         $walletTransactions = Auth::user()->walletTransaction()->whereMonth('date',$month->month)->get();
         $transactions = Auth::user()->transaction()->whereMonth('date',$month->month)->get();
@@ -35,6 +39,27 @@ class TransactionController extends Controller
             'walletTransactions' => $walletTransactions,
             'transactions' => $transactions,
             'month' => $month,
+        ]);
+    }
+
+    public function showCategories(){
+        $spendCategories = Auth::user()->category()->where('type',config('const.spendType'))->get();
+        $receiveCategories = Auth::user()->category()->where('type',config('const.receiveType'))->get();
+        return view('transaction.show_categories')->with([
+            'spendCategories' => $spendCategories,
+            'receiveCategories' => $receiveCategories,
+        ]);
+    }
+
+    public function showTransactionsByCategory($id){
+        $category = Category::find($id);
+        $catName = $category->name;
+        $catType = $category->type;
+        $transactions = $category->transaction;
+        return view('transaction.show_transactions_by_category')->with([
+            'catName' => $catName,
+            'transactions' => $transactions,
+            'catType' => $catType,
         ]);
     }
 
@@ -186,5 +211,37 @@ class TransactionController extends Controller
     	$wallet->save();
     	$transaction->delete();
     	return redirect()->back()->with('success','Delete Transaction Successfully');
+    }
+
+    public function showReport(){
+        $now = Carbon::now();
+        $categories = DB::table('users')->join('categories','users.id','=','categories.user_id')
+                                        ->join('transactions','categories.id','=','transactions.category_id')
+                                        ->selectRaw('categories.*, sum(transactions.amount) as sum')
+                                        ->where('users.id',Auth::id())
+                                        ->whereMonth('transactions.date',$now->month)
+                                        ->groupBy('categories.name')
+                                        ->get();
+
+        return view('transaction.report')->with('categories',$categories);
+    }
+
+    public function showReportByMonth(Request $request){
+        $validatedData = $request->validate([
+            'month' => 'required'
+        ]);
+        $month = Carbon::parse($request->get('month'));
+        $categories = DB::table('users')->join('categories','users.id','=','categories.user_id')
+                                        ->join('transactions','categories.id','=','transactions.category_id')
+                                        ->selectRaw('categories.*, sum(transactions.amount) as sum')
+                                        ->where('users.id',Auth::id())
+                                        ->whereMonth('transactions.date',$month->month)
+                                        ->groupBy('categories.name')
+                                        ->get();
+
+        return view('transaction.report_by_month')->with([
+            'categories' => $categories,
+            'month' => $month
+        ]);
     }
 }

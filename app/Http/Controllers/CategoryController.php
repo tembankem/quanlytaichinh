@@ -66,8 +66,8 @@ class CategoryController extends Controller
     	if ($request->get('parent') == 0) {
     		$category = new Category;
     		$category->name = $request->get('name');
-    		$category->type = Category::$receiveType;
-    		$category->level = Category::$rootLevel;
+    		$category->type = config('const.receiveType');
+    		$category->level = config('const.rootLevel');
     		$category->user_id = Auth::id();
     		$category->save();
     		return redirect()->route('category.receiveIndex')->with('success','Create new category successfully!');
@@ -76,7 +76,7 @@ class CategoryController extends Controller
     		$parent = Category::find($request->get('parent'));
     		$category = new Category;
     		$category->name = $request->get('name');
-    		$category->type = Category::$receiveType;
+    		$category->type = config('const.receiveType');
     		$category->level = $parent->level + 1;
     		$category->parent_id = $parent->id;
     		$category->user_id = Auth::id();

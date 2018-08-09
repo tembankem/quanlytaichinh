@@ -70,6 +70,8 @@ Route::get('category/delete/{id}','CategoryController@delete')->name('category.d
 //show transactions
 Route::get('transaction/index','TransactionController@index')->name('transaction.index');
 Route::post('transaction/index/month','TransactionController@showIndexByMonth')->name('transaction.indexByMonth');
+Route::get('transaction/categories','TransactionController@showCategories')->name('transaction.showCategory');
+Route::get('transaction/categories/{id}','TransactionController@showTransactionsByCategory')->name('transaction.showTransactionsByCategory');
 //add transaction
 Route::get('transaction/spend/add','TransactionController@showAddSpendForm')->name('transaction.showAddSpend');
 Route::post('transaction/spend/add','TransactionController@addSpend')->name('transaction.addSpend');
@@ -83,3 +85,8 @@ Route::put('transaction/receive/edit/{transaction}','TransactionController@editR
 //delete transaction
 Route::get('transaction/spend/delete/{id}','TransactionController@deleteSpend')->name('transaction.deleteSpend');
 Route::get('transaction/receive/delete/{id}','TransactionController@deleteReceive')->name('transaction.deleteReceive');
+
+//Report
+//show report
+Route::get('transaction/report','TransactionController@showReport')->name('transaction.showReport');
+Route::post('transaction/report/month','TransactionController@showReportByMonth')->name('transaction.reportByMonth');

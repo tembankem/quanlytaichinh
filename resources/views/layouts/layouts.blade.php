@@ -55,41 +55,10 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-sitemap"></i>
-            <span class="nav-link-text">Menu Levels</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseMulti">
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-              <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Link</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="{{ route('transaction.showReport') }}">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">Report</span>
           </a>
         </li>
       </ul>
@@ -303,6 +272,30 @@
       } );
 
       $('#receiveTransactionTable').dataTable( {
+            "language": {
+              "emptyTable": "You don't have any Transaction",
+              "lengthMenu":     "Show _MENU_ Transactions",
+              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+            },
+            "columnDefs": [
+              { "orderable": false, "targets": [6,7] }
+            ]
+      } );
+
+      $('#reportSpendTable').dataTable( {
+            "language": {
+              "emptyTable": "You don't have any Transaction",
+              "lengthMenu":     "Show _MENU_ Transactions",
+              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+            },
+            "columnDefs": [
+              { "orderable": false, "targets": [6,7] }
+            ]
+      } );
+
+      $('#reportReceiveTable').dataTable( {
             "language": {
               "emptyTable": "You don't have any Transaction",
               "lengthMenu":     "Show _MENU_ Transactions",
