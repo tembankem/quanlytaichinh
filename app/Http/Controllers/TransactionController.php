@@ -20,8 +20,21 @@ class TransactionController extends Controller
 
     public function index(){
     	$now = Carbon::now();
-    	$walletTransactions = Auth::user()->walletTransaction()->whereMonth('date',$now->month)->get();
-    	$transactions = Auth::user()->transaction()->whereMonth('date',$now->month)->get();
+    	$walletTransactions = DB::table('users')->join('wallettransactions','users.id','=','wallettransactions.user_id')
+                                                ->join('wallets as w1','w1.id','=','wallettransactions.wallet_id')
+                                                ->join('wallets as w2','w2.id','=','wallettransactions.receive_wallet_id')
+                                                ->selectRaw('wallettransactions.*, w1.name as wal_name, w2.name as wal_rec_name')
+                                                ->where('users.id',Auth::id())
+                                                ->whereMonth('wallettransactions.date',$now->month)
+                                                ->get();
+    	// $transactions = Auth::user()->transaction()->whereMonth('date',$now->month)->get();
+        $transactions = DB::table('users')->join('categories','users.id','=','categories.user_id')
+                                        ->join('transactions','categories.id','=','transactions.category_id')
+                                        ->join('wallets','wallets.id','=','transactions.wallet_id')
+                                        ->selectRaw('transactions.*, categories.name as cat_name, categories.type, wallets.name as wal_name')
+                                        ->where('users.id',Auth::id())
+                                        ->whereMonth('transactions.date',$now->month)
+                                        ->get();
     	return view('transaction.index')->with([
     		'walletTransactions' => $walletTransactions,
     		'transactions' => $transactions,
@@ -33,8 +46,20 @@ class TransactionController extends Controller
             'month' => 'required'
         ]);
         $month = Carbon::parse($request->get('month'));
-        $walletTransactions = Auth::user()->walletTransaction()->whereMonth('date',$month->month)->get();
-        $transactions = Auth::user()->transaction()->whereMonth('date',$month->month)->get();
+        $walletTransactions = DB::table('users')->join('wallettransactions','users.id','=','wallettransactions.user_id')
+                                                ->join('wallets as w1','w1.id','=','wallettransactions.wallet_id')
+                                                ->join('wallets as w2','w2.id','=','wallettransactions.receive_wallet_id')
+                                                ->selectRaw('wallettransactions.*, w1.name as wal_name, w2.name as wal_rec_name')
+                                                ->where('users.id',Auth::id())
+                                                ->whereMonth('wallettransactions.date',$month->month)
+                                                ->get();
+        $transactions = DB::table('users')->join('categories','users.id','=','categories.user_id')
+                                        ->join('transactions','categories.id','=','transactions.category_id')
+                                        ->join('wallets','wallets.id','=','transactions.wallet_id')
+                                        ->selectRaw('transactions.*, categories.name as cat_name, categories.type, wallets.name as wal_name')
+                                        ->where('users.id',Auth::id())
+                                        ->whereMonth('transactions.date',$month->month)
+                                        ->get();
         return view('transaction.index_by_month')->with([
             'walletTransactions' => $walletTransactions,
             'transactions' => $transactions,
@@ -55,7 +80,11 @@ class TransactionController extends Controller
         $category = Category::find($id);
         $catName = $category->name;
         $catType = $category->type;
-        $transactions = $category->transaction;
+        $transactions = DB::table('categories')->join('transactions','categories.id','=','transactions.category_id')
+                                            ->join('wallets','wallets.id','=','transactions.wallet_id')
+                                            ->selectRaw('transactions.*, wallets.name as wal_name')
+                                            ->where('categories.id',$id)
+                                            ->get();
         return view('transaction.show_transactions_by_category')->with([
             'catName' => $catName,
             'transactions' => $transactions,

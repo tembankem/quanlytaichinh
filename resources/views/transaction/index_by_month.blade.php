@@ -58,17 +58,17 @@
 	              	</tfoot>
 	              	<tbody>
 						@php $count = 0 @endphp
-	            		@foreach($transactions as $key)
-	            		@if($key->category->type == config('const.spendType'))
+	            		@foreach($transactions as $key => $value)
+	            		@if($value->type == config('const.spendType'))
 						<tr>
 							<td>{{ $count += 1 }}</td>
-							<td>{{ $key->category->name }}</td>
-							<td>{{ $key->wallet->name }}</td>
-							<td>- {{ number_format($key['amount']) }} đ</td>
-							<td>{{ $key['note'] }}</td>
-							<td>{{ \Carbon\Carbon::parse($key->date)->format('d-m-Y') }}</td>
-							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditSpend',$key['id']) }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteSpend',$key['id']) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
+							<td>{{ $value->cat_name }}</td>
+							<td>{{ $value->wal_name }}</td>
+							<td>+ {{ number_format($value->amount) }} đ</td>
+							<td>{{ $value->note }}</td>
+							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
+							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditReceive',$value->id) }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteReceive',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
 						</tr>
 						@endif
 	            		@endforeach
@@ -101,16 +101,16 @@
 	              	<tbody>
 						@php $count = 0 @endphp
 	            		@foreach($transactions as $key)
-	            		@if($key->category->type == config('const.receiveType'))
+	            		@if($value->type == config('const.receiveType'))
 						<tr>
 							<td>{{ $count += 1 }}</td>
-							<td>{{ $key->category->name }}</td>
-							<td>{{ $key->wallet->name }}</td>
-							<td>+ {{ number_format($key['amount']) }} đ</td>
-							<td>{{ $key['note'] }}</td>
-							<td>{{ \Carbon\Carbon::parse($key->date)->format('d-m-Y') }}</td>
-							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditReceive',$key['id']) }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteReceive',$key['id']) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
+							<td>{{ $value->cat_name }}</td>
+							<td>{{ $value->wal_name }}</td>
+							<td>+ {{ number_format($value->amount) }} đ</td>
+							<td>{{ $value->note }}</td>
+							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
+							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditReceive',$value->id) }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteReceive',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
 						</tr>
 						@endif
 	            		@endforeach
@@ -145,16 +145,16 @@
 	              	</tfoot>
 	              	<tbody>
 						@php $count = 0 @endphp
-	            		@foreach($walletTransactions as $key)
+	            		@foreach($walletTransactions as $key => $value)
 						<tr>
 							<td>{{ $count += 1 }}</td>
-							<td>{{ $key->wallet->name }}</td>
-							<td>{{ $key->receiveWallet->name }}</td>
-							<td>{{ number_format($key['exchange']) }} đ</td>
-							<td>{{ $key['note'] }}</td>
-							<td>{{ \Carbon\Carbon::parse($key->date)->format('d-m-Y') }}</td>
-							<td class="text-center"><a class="btn btn-primary" href="{{ route('wallet.showEditTransfer',$key['id']) }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="{{ route('wallet.deleteTransfer',$key['id']) }}" title="Delete" onclick="return confirm('Do you want to delete this Transfer?');">Delete</a></td>
+							<td>{{ $value->wal_name }}</td>
+							<td>{{ $value->wal_rec_name }}</td>
+							<td>{{ number_format($value->exchange) }} đ</td>
+							<td>{{ $value->note }}</td>
+							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
+							<td class="text-center"><a class="btn btn-primary" href="{{ route('wallet.showEditTransfer',$value->id) }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('wallet.deleteTransfer',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transfer?');">Delete</a></td>
 						</tr>
 	            		@endforeach
 	              	</tbody>

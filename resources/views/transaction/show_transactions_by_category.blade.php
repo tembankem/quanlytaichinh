@@ -37,19 +37,17 @@
 	              	</tfoot>
 	              	<tbody>
 						@php $count = 0 @endphp
-	            		@foreach($transactions as $key)
-	            		@if($key->category->type == config('const.spendType'))
+	            		@foreach($transactions as $key => $value)
 						<tr>
 							<td>{{ $count += 1 }}</td>
-							<td>{{ $key->category->name }}</td>
-							<td>{{ $key->wallet->name }}</td>
-							<td>- {{ number_format($key['amount']) }} đ</td>
-							<td>{{ $key['note'] }}</td>
-							<td>{{ \Carbon\Carbon::parse($key->date)->format('d-m-Y') }}</td>
-							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditSpend',$key['id']) }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteSpend',$key['id']) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
+							<td>{{ $catName }}</td>
+							<td>{{ $value->wal_name }}</td>
+							<td>- {{ number_format($value->amount) }} đ</td>
+							<td>{{ $value->note }}</td>
+							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
+							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditSpend',$value->id) }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteSpend',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
 						</tr>
-						@endif
 	            		@endforeach
 	              	</tbody>
 	            </table>
@@ -79,19 +77,17 @@
 	              	</tfoot>
 	              	<tbody>
 						@php $count = 0 @endphp
-	            		@foreach($transactions as $key)
-	            		@if($key->category->type == config('const.receiveType'))
+	            		@foreach($transactions as $key => $value)
 						<tr>
 							<td>{{ $count += 1 }}</td>
-							<td>{{ $key->category->name }}</td>
-							<td>{{ $key->wallet->name }}</td>
-							<td>+ {{ number_format($key['amount']) }} đ</td>
-							<td>{{ $key['note'] }}</td>
-							<td>{{ \Carbon\Carbon::parse($key->date)->format('d-m-Y') }}</td>
-							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditReceive',$key['id']) }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteReceive',$key['id']) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
+							<td>{{ $catName }}</td>
+							<td>{{ $value->wal_name }}</td>
+							<td>- {{ number_format($value->amount) }} đ</td>
+							<td>{{ $value->note }}</td>
+							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
+							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditSpend',$value->id) }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteSpend',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
 						</tr>
-						@endif
 	            		@endforeach
 	              	</tbody>
 	            </table>
