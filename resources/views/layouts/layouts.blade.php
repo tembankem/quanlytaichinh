@@ -286,25 +286,19 @@
       $('#reportSpendTable').dataTable( {
             "language": {
               "emptyTable": "You don't have any Transaction",
-              "lengthMenu":     "Show _MENU_ Transactions",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
-              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
-            },
-            "columnDefs": [
-              { "orderable": false, "targets": [6,7] }
-            ]
+              "lengthMenu":     "Show _MENU_ Categories",
+              "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
+              "infoEmpty":      "Showing 0 to 0 of 0 Category"
+            }
       } );
 
       $('#reportReceiveTable').dataTable( {
             "language": {
               "emptyTable": "You don't have any Transaction",
-              "lengthMenu":     "Show _MENU_ Transactions",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
-              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
-            },
-            "columnDefs": [
-              { "orderable": false, "targets": [6,7] }
-            ]
+              "lengthMenu":     "Show _MENU_ Categories",
+              "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
+              "infoEmpty":      "Showing 0 to 0 of 0 Category"
+            }
       } );
     </script>
   </div>
