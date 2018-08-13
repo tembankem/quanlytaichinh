@@ -63,7 +63,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update') }}
                                 </button>
-                                <a href="{{ route('category.delete', $category['id']) }}" title="Delete" class="btn btn-danger">Delete</a>
+                                <a href="{{ route('category.delete', $category['id']) }}" title="Delete" class="btn btn-danger" onclick="return confirm('Do you want to delete this Category?');">Delete</a>
                             </div>
                         </div>
                     </form>

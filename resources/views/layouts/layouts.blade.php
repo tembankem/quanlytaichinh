@@ -244,7 +244,10 @@
             "lengthMenu":     "Show _MENU_ Wallets",
             "info":           "Showing _START_ to _END_ of _TOTAL_ Wallets",
             "infoEmpty":      "Showing 0 to 0 of 0 Wallets"
-          }
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [3,4] }
+          ]
     } );
 
     $('#walletTransactionTable').dataTable( {
