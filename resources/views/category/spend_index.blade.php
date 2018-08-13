@@ -20,7 +20,7 @@
                     @endif
                     <ul class="">
                     	@foreach($data as $key)
-                    	@if($key['level'] == 1)
+                    	@if($key['level'] == config('const.rootLevel'))
                     	<li>
                     		<a href="{{ route('category.showEditSpend',$key['id']) }}" title="{{ $key['name'] }}">{{ $key['name'] }}</a>
                     		<ul class="">
