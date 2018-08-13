@@ -92,8 +92,8 @@
 							<td>+ {{ number_format($value->amount) }} đ</td>
 							<td>{{ $value->note }}</td>
 							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
-							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditSpend',$value->id) }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteSpend',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
+							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditReceive',$value->id) }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteReceive',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
 						</tr>
 	            		@endforeach
 	              	</tbody>
