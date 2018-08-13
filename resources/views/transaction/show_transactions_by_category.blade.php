@@ -26,7 +26,7 @@
         <div class="card-header"><i class="fa fa-table"></i> Spend Transactions in {{ $catName }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
-	            <table class="table table-bordered" id="spendTransactionTable" width="100%" cellspacing="0">
+	            <table class="table table-bordered" id="speTransactionTableCat" width="100%" cellspacing="0">
 	              	<thead>
 	                	<tr>
 	                		<td>No.</td>
@@ -66,7 +66,7 @@
         <div class="card-header"><i class="fa fa-table"></i> Receive Transactions in {{ $catName }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
-	            <table class="table table-bordered" id="receiveTransactionTable" width="100%" cellspacing="0">
+	            <table class="table table-bordered" id="recTransactionTableCat" width="100%" cellspacing="0">
 	              	<thead>
 	                	<tr>
 	                		<td>No.</td>
@@ -89,7 +89,7 @@
 							<td>{{ $count += 1 }}</td>
 							<td>{{ $catName }}</td>
 							<td>{{ $value->wal_name }}</td>
-							<td>- {{ number_format($value->amount) }} đ</td>
+							<td>+ {{ number_format($value->amount) }} đ</td>
 							<td>{{ $value->note }}</td>
 							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
 							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditSpend',$value->id) }}" title="Edit">Edit</a></td>

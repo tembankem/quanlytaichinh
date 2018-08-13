@@ -43,7 +43,7 @@
         <div class="card-header"><i class="fa fa-table"></i> Total Money Spend In {{ \Carbon\Carbon::parse($month)->format('F-Y') }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
-	            <table class="table table-bordered" id="reportSpendTable" width="100%" cellspacing="0">
+	            <table class="table table-bordered" id="reportSpendTableMonth" width="100%" cellspacing="0">
 	              	<thead>
 	                	<tr>
 	                		<td>No.</td>
@@ -76,7 +76,7 @@
         <div class="card-header"><i class="fa fa-table"></i> Total Money Receive In {{ \Carbon\Carbon::parse($month)->format('F-Y') }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
-	            <table class="table table-bordered" id="reportReceiveTable	" width="100%" cellspacing="0">
+	            <table class="table table-bordered" id="reportReceiveTableMonth" width="100%" cellspacing="0">
 	              	<thead>
 	                	<tr>
 	                		<td>No.</td>

@@ -286,6 +286,54 @@
           ]
     } );
 
+    $('#speTransactionTableCat').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Transactions",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+            "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [6,7] }
+          ]
+    } );
+
+    $('#recTransactionTableCat').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Transactions",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+            "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [6,7] }
+          ]
+    } );
+
+    $('#recTransactionTableMon').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Transactions",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+            "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [6,7] }
+          ]
+    } );
+
+    $('#speTransactionTableMon').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Transactions",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+            "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [6,7] }
+          ]
+    } );
+
     $('#reportSpendTable').dataTable( {
           "language": {
             "emptyTable": "You don't have any Transaction",
@@ -296,6 +344,24 @@
     } );
 
     $('#reportReceiveTable').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Categories",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
+            "infoEmpty":      "Showing 0 to 0 of 0 Category"
+          }
+    } );
+
+    $('#reportSpendTableMonth').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Categories",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
+            "infoEmpty":      "Showing 0 to 0 of 0 Category"
+          }
+    } );
+
+    $('#reportReceiveTableMonth').dataTable( {
           "language": {
             "emptyTable": "You don't have any Transaction",
             "lengthMenu":     "Show _MENU_ Categories",

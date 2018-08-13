@@ -46,7 +46,7 @@
         <div class="card-header"><i class="fa fa-table"></i> Spend Transactions in {{ \Carbon\Carbon::parse($month)->format('F-Y') }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
-	            <table class="table table-bordered" id="spendTransactionTable" width="100%" cellspacing="0">
+	            <table class="table table-bordered" id="speTransactionTableMon" width="100%" cellspacing="0">
 	              	<thead>
 	                	<tr>
 	                		<td>No.</td>
@@ -73,8 +73,8 @@
 							<td>+ {{ number_format($value->amount) }} đ</td>
 							<td>{{ $value->note }}</td>
 							<td>{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}</td>
-							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditReceive',$value->id) }}" title="Edit">Edit</a></td>
-							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteReceive',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
+							<td class="text-center"><a class="btn btn-primary" href="{{ route('transaction.showEditSpend',$value->id) }}" title="Edit">Edit</a></td>
+							<td class="text-center"><a class="btn btn-danger" href="{{ route('transaction.deleteSpend',$value->id) }}" title="Delete" onclick="return confirm('Do you want to delete this Transaction?');">Delete</a></td>
 						</tr>
 						@endif
 	            		@endforeach
@@ -88,7 +88,7 @@
         <div class="card-header"><i class="fa fa-table"></i> Receive Transactions in {{ \Carbon\Carbon::parse($month)->format('F-Y') }}</div>
     	<div class="card-body">
          	<div class="table-responsive">
-	            <table class="table table-bordered" id="receiveTransactionTable" width="100%" cellspacing="0">
+	            <table class="table table-bordered" id="recTransactionTableMon" width="100%" cellspacing="0">
 	              	<thead>
 	                	<tr>
 	                		<td>No.</td>
@@ -105,11 +105,11 @@
 	                
 	              	</tfoot>
 	              	<tbody>
-						@php $count = 0 @endphp
-	            		@foreach($transactions as $key)
+						@php $count2 = 0 @endphp
+	            		@foreach($transactions as $key => $value)
 	            		@if($value->type == config('const.receiveType'))
 						<tr>
-							<td>{{ $count += 1 }}</td>
+							<td>{{ $count2 += 1 }}</td>
 							<td>{{ $value->cat_name }}</td>
 							<td>{{ $value->wal_name }}</td>
 							<td>+ {{ number_format($value->amount) }} đ</td>
