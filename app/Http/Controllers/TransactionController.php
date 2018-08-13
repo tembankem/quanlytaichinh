@@ -161,18 +161,22 @@ class TransactionController extends Controller
     public function showEditSpendForm($id){
     	$categories = Auth::user()->category()->where('type',config('const.spendType'))->get();
     	$transaction = Transaction::find($id);
+        $category = $transaction->category->id;
     	return view('transaction.edit_spend')->with([
     		'categories' => $categories,
-    		'transaction' => $transaction
+    		'transaction' => $transaction,
+            'category' => $category
     	]);
     }
 
     public function showEditReceiveForm($id){
     	$categories = Auth::user()->category()->where('type',config('const.receiveType'))->get();
     	$transaction = Transaction::find($id);
+        $category = $transaction->category->id;
     	return view('transaction.edit_receive')->with([
     		'categories' => $categories,
-    		'transaction' => $transaction
+    		'transaction' => $transaction,
+            'category' => $category
     	]);
     }
 

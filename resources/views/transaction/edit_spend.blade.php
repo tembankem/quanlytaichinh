@@ -27,7 +27,7 @@
                                 <select id="category" class="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}" name="category" value="{{ old('category') }}">
                                     <option value="">Choose Category</option>
                                     @foreach($categories as $key)
-                                        <option @if($key['id']==$transaction->category->id) selected @endif value="{{ $key['id'] }}">{{ $key['name'] }}</option>
+                                        <option @if($key['id']==$category) selected @endif value="{{ $key['id'] }}">{{ $key['name'] }}</option>
                                     @endforeach
                                 </select>
 

@@ -208,99 +208,99 @@
   @endauth
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    @auth
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Vu Thanh Hai 2018</small>
-        </div>
+  @auth
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © Vu Thanh Hai 2018</small>
       </div>
-    </footer>
-    @endauth
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('/jquery-easing/jquery.easing.min.js') }}"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="{{ asset('/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('/datatables/dataTables.bootstrap4.js') }}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('/js/sb-admin.min.js') }}"></script>
-    <!-- Custom scripts for this page-->
-    <script src="{{ asset('/js/sb-admin-datatables.min.js') }}"></script>
-    <script src="{{ asset('/js/sb-admin-charts.min.js') }}"></script>
-    <script>
-      $('#walletTable').dataTable( {
-            "language": {
-              "emptyTable": "You don't have any Wallet",
-              "lengthMenu":     "Show _MENU_ Wallets",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Wallets",
-              "infoEmpty":      "Showing 0 to 0 of 0 Wallets"
-            }
-      } );
+    </div>
+  </footer>
+  @endauth
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  
+  <!-- Bootstrap core JavaScript-->
+  <script src="{{ asset('/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="{{ asset('/jquery-easing/jquery.easing.min.js') }}"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="{{ asset('/chart.js/Chart.min.js') }}"></script>
+  <script src="{{ asset('/datatables/jquery.dataTables.js') }}"></script>
+  <script src="{{ asset('/datatables/dataTables.bootstrap4.js') }}"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="{{ asset('/js/sb-admin.min.js') }}"></script>
+  <!-- Custom scripts for this page-->
+  <script src="{{ asset('/js/sb-admin-datatables.min.js') }}"></script>
+  <script src="{{ asset('/js/sb-admin-charts.min.js') }}"></script>
+  <script>
+    $('#walletTable').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Wallet",
+            "lengthMenu":     "Show _MENU_ Wallets",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Wallets",
+            "infoEmpty":      "Showing 0 to 0 of 0 Wallets"
+          }
+    } );
 
-      $('#walletTransactionTable').dataTable( {
-            "language": {
-              "emptyTable": "You don't have any Transfer",
-              "lengthMenu":     "Show _MENU_ Transfers",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Transfer",
-              "infoEmpty":      "Showing 0 to 0 of 0 Transfer"
-            },
-            "columnDefs": [
-              { "orderable": false, "targets": [6,7] }
-            ]
-      } );
+    $('#walletTransactionTable').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transfer",
+            "lengthMenu":     "Show _MENU_ Transfers",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Transfer",
+            "infoEmpty":      "Showing 0 to 0 of 0 Transfer"
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [6,7] }
+          ]
+    } );
 
-      $('#spendTransactionTable').dataTable( {
-            "language": {
-              "emptyTable": "You don't have any Transaction",
-              "lengthMenu":     "Show _MENU_ Transactions",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
-              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
-            },
-            "columnDefs": [
-              { "orderable": false, "targets": [6,7] }
-            ]
-      } );
+    $('#spendTransactionTable').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Transactions",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+            "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [6,7] }
+          ]
+    } );
 
-      $('#receiveTransactionTable').dataTable( {
-            "language": {
-              "emptyTable": "You don't have any Transaction",
-              "lengthMenu":     "Show _MENU_ Transactions",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
-              "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
-            },
-            "columnDefs": [
-              { "orderable": false, "targets": [6,7] }
-            ]
-      } );
+    $('#receiveTransactionTable').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Transactions",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Transactions",
+            "infoEmpty":      "Showing 0 to 0 of 0 Transactions"
+          },
+          "columnDefs": [
+            { "orderable": false, "targets": [6,7] }
+          ]
+    } );
 
-      $('#reportSpendTable').dataTable( {
-            "language": {
-              "emptyTable": "You don't have any Transaction",
-              "lengthMenu":     "Show _MENU_ Categories",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
-              "infoEmpty":      "Showing 0 to 0 of 0 Category"
-            }
-      } );
+    $('#reportSpendTable').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Categories",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
+            "infoEmpty":      "Showing 0 to 0 of 0 Category"
+          }
+    } );
 
-      $('#reportReceiveTable').dataTable( {
-            "language": {
-              "emptyTable": "You don't have any Transaction",
-              "lengthMenu":     "Show _MENU_ Categories",
-              "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
-              "infoEmpty":      "Showing 0 to 0 of 0 Category"
-            }
-      } );
-    </script>
-  </div>
+    $('#reportReceiveTable').dataTable( {
+          "language": {
+            "emptyTable": "You don't have any Transaction",
+            "lengthMenu":     "Show _MENU_ Categories",
+            "info":           "Showing _START_ to _END_ of _TOTAL_ Categories",
+            "infoEmpty":      "Showing 0 to 0 of 0 Category"
+          }
+    } );
+  </script>
+
 </body>
 </html>
