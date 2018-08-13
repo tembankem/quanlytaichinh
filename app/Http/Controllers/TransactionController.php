@@ -45,6 +45,7 @@ class TransactionController extends Controller
         $validatedData = $request->validate([
             'month' => 'required'
         ]);
+        $date = $request->get('month');
         $month = Carbon::parse($request->get('month'));
         $walletTransactions = DB::table('users')->join('wallettransactions','users.id','=','wallettransactions.user_id')
                                                 ->join('wallets as w1','w1.id','=','wallettransactions.wallet_id')
@@ -64,6 +65,7 @@ class TransactionController extends Controller
             'walletTransactions' => $walletTransactions,
             'transactions' => $transactions,
             'month' => $month,
+            'date' => $date
         ]);
     }
 
@@ -263,6 +265,7 @@ class TransactionController extends Controller
         $validatedData = $request->validate([
             'month' => 'required'
         ]);
+        $date = $request->get('month');
         $month = Carbon::parse($request->get('month'));
         $categories = DB::table('users')->join('categories','users.id','=','categories.user_id')
                                         ->join('transactions','categories.id','=','transactions.category_id')
@@ -274,7 +277,8 @@ class TransactionController extends Controller
 
         return view('transaction.report_by_month')->with([
             'categories' => $categories,
-            'month' => $month
+            'month' => $month,
+            'date' => $date
         ]);
     }
 }

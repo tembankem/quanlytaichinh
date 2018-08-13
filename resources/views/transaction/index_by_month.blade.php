@@ -14,7 +14,7 @@
             <label for="month" class="col-md-2 col-form-label text-md-right">{{ __('Search by Month') }}</label>
 
             <div class="col-md-2">
-                <input id="month" type="month" class="form-control{{ $errors->has('month') ? ' is-invalid' : '' }}" name="month" value="">
+                <input id="month" type="month" class="form-control{{ $errors->has('month') ? ' is-invalid' : '' }}" name="month" value="{{ $date }}">
 
                 @if ($errors->has('month'))
                     <span class="invalid-feedback" role="alert">
