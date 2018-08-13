@@ -3,6 +3,14 @@
 @section('title') Create New Receive Transaction @endsection
 
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('transaction.index') }}">Transactions</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Create New Receive Transaction</li>
+  </ol>
+</nav>
+
 <div class="container">
     <a href="{{ route('transaction.index') }}" title="Back" class="btn btn-primary mb-3">Back</a>
     <div class="row justify-content-center">

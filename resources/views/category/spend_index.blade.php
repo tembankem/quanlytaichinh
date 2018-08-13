@@ -3,6 +3,12 @@
 @section('title') Spend Transaction Categories @endsection
 
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Spend Category</li>
+  </ol>
+</nav>
 <div class="container">
 	<a href="{{ route('category.showAddSpend') }}" title="Add New Spend Category" class="btn btn-primary mb-3">+ Add New Spend Category</a>
     <div class="row justify-content-center">

@@ -3,6 +3,13 @@
 @section('title') Edit Wallet @endsection
 
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('wallet.index') }}">Wallet</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Wallet</li>
+  </ol>
+</nav>
 <div class="container">
     <a href= "{{ route('wallet.index') }}" title="Back" class="btn btn-primary mb-3">Back</a>
     <div class="row justify-content-center">

@@ -3,6 +3,12 @@
 @section('title') Wallet @endsection
 
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Wallet</li>
+  </ol>
+</nav>
 
 <div class="mb-2">
 <a href="{{ route('wallet.showAdd') }}" title="Add New Wallet" class="btn btn-primary">+ Create New Wallet</a>

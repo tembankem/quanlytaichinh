@@ -3,6 +3,12 @@
 @section('title') Receive Transaction Categories @endsection
 
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Receive Category</li>
+  </ol>
+</nav>
 <div class="container">
 	<a href="{{ route('category.showAddReceive') }}" title="Add New Receive Category" class="btn btn-primary mb-3">+ Add New Receive Category</a>
     <div class="row justify-content-center">

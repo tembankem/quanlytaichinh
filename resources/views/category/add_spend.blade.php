@@ -4,6 +4,13 @@
 
 @section('content')
 <div class="container">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('category.spendIndex') }}">Spend Category</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Create New Spend Category</li>
+  </ol>
+</nav>
     <a href="{{ route('category.spendIndex') }}" title="Back" class="btn btn-primary mb-3">Back</a>
     <div class="row justify-content-center">
         <div class="col-md-8">

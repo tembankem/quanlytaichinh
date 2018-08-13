@@ -3,6 +3,12 @@
 @section('title') Report In {{ \Carbon\Carbon::parse($month)->format('F-Y') }} @endsection
 
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Report</li>
+  </ol>
+</nav>
 
 <div class="container">
 	<form method="POST" action="{{ route('transaction.reportByMonth') }}" aria-label="{{ __('Search Report By Month') }}">
