@@ -27,6 +27,7 @@ class UserController extends Controller
 	            'name' => 'required|string|max:255',
 	            'email' => 'required|string|email|max:255|unique:users',
                 'phone' => array('regex:/^(01[2689]|09)[0-9]{8}$/'),
+                'birthday' => 'required|date|before:today'
 	    	]);
 
 	    	$user->update([
@@ -43,6 +44,7 @@ class UserController extends Controller
 	            'name' => 'required|string|max:255',
 	            'email' => 'required|string|email|max:255',
                 'phone' => array('regex:/^(01[2689]|09)[0-9]{8}$/'),
+                'birthday' => 'required|date|before:today'
 	    	]);
 	    	$user->update([
 	    		'name' => $request->input('name'),

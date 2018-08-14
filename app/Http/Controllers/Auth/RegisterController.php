@@ -62,6 +62,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'phone' => array('regex:/^(01[2689]|09)[0-9]{8}$/'),
+            'birthday' => 'require|date|before:today',
         ]);
     }
 
