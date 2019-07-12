@@ -8,14 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username','name', 'email', 'password', 'birthday', 'phone', 'address',
     ];
 
     /**
@@ -26,4 +26,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function wallet(){
+        return $this->hasMany('App\Wallet');
+    }
+
+    public function category(){
+        return $this->hasMany('App\Category');
+    }
+
+    public function transaction(){
+        return $this->hasMany('App\Transaction');
+    }
+
+    public function walletTransaction(){
+        return $this->hasMany('App\WalletTransaction');
+    }
 }

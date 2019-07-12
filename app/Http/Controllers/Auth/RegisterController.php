@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Jobs\SendWelcomeEmail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use App\Classes\ActivationService;
+use App\UserActivation;
 
 class RegisterController extends Controller
 {
@@ -29,15 +35,17 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $activationService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ActivationService $activationService)
     {
         $this->middleware('guest');
+        $this->activationService = $activationService;
     }
 
     /**
@@ -49,9 +57,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'username' => 'required|string|max:255|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'phone' => array('regex:/^(01[2689]|09)[0-9]{8}$/'),
+            'birthday' => 'require|date|before:today',
         ]);
     }
 
@@ -64,9 +75,29 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'username' => $data['username'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'birthday' => $data['birthday'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
         ]);
+    }
+
+    public function register(Request $request){
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        event(new Registered($user));
+        $this->activationService->sendActivationMail($user);
+        return redirect('/login')->with('status', 'Check email to verify');
+    }
+
+    public function activateUser($token){
+        if ($user = $this->activationService->activateUser($token)) {
+            auth()->login($user);
+            return redirect('/login');
+        }
+        abort(404);
     }
 }
